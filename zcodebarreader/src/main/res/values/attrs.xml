@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="code_bar_reader_attributes">
+            <attr name="code_bar_description" format="string"/>
+            <attr name="code_bar_description_color" format="color"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="dark_white_text">#FFFFFF</color>
+
+    <color name="view_divider">#242426</color>
+    <color name="back_res_qr_code">#363638</color>
+    <color name="icons_location">#BABAC3</color>
+    <color name="error">#FF3B30</color>
+
+
+</resources>

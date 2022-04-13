@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">zCodeBarReader</string>
+
+
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="description_qr_code">Press the QR Code Icon to start scanning</string>
+    <string name="text_copied">Text copied</string>
+    <string name="error_qr_code"> QR Code not recognized, rescan it again or try another code.</string>
+    <string name="error_titel_qr">Error : </string>
+    <string name="scan_barre_code">Scan Bar Code</string>
+    <string name="description_bare_code">Press the Bar Code Icon to start scanning </string>
+
+
+</resources>
