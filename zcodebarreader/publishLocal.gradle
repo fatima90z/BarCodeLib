@@ -6,7 +6,7 @@ task sourceJar(type: Jar) {
 }
 
 project.afterEvaluate {
-    { publishToMavenLocal } {
+    publishToMavenLocal {
         def groupId = "com.zetabox"
         def artifactId = "zcodeBarReader"
         def versionName = "0.0.1-local"
@@ -37,21 +37,21 @@ project.afterEvaluate {
                                         project.configurations.implementation.allDependencies.find {
                                             dep -> dep.name == it.artifactId.text()
                                         }
-                            }.each { it.scope*.value = 'compile' }
+                            }.each { it.scope*.value = 'compile'}
                 }
             }
         }
 
         doLast {
             def prettyPrint = {
-                1.upto(100L, { print "=" })
+                1.upto(100, { print "=" })
                 println()
             }
             println()
             prettyPrint()
             println "PUBLICATION FINISHED"
-            println "Artifact RELEASE: " + groupId + ":" + artifactId + ":" + versionName + releaseSuffix
-            println "Artifact DEBUG: " + groupId + ":" + artifactId + ":" + versionName + debugSuffix
+            println "Artifact RELEASE: " + groupId + ":" + artifactId +  ":" + versionName + releaseSuffix
+            println "Artifact DEBUG: " + groupId + ":" + artifactId +  ":" + versionName + debugSuffix
             prettyPrint()
         }
     }
