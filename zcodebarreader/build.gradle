@@ -6,11 +6,11 @@ plugins {
 apply from: 'publishLocal.gradle'
 
 android {
-    compileSdk 30
+    compileSdk 32
 
     defaultConfig {
         minSdk 21
-        targetSdk 30
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -30,7 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
     configurations.all {
         resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
     }
