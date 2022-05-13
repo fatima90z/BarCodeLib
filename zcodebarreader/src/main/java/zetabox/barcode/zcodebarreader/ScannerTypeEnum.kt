@@ -5,5 +5,6 @@ package zetabox.barcode.zcodebarreader
 
  **/
 enum class ScannerTypeEnum {
-    PRODUCT_CODE_TYPES, QR_CODE
+    BARE_CODE,
+    QR_CODE
 }

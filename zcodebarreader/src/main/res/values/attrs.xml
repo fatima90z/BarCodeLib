@@ -2,7 +2,17 @@
 <resources>
 
     <declare-styleable name="code_bar_reader_attributes">
-            <attr name="code_bar_description" format="string"/>
-            <attr name="code_bar_description_color" format="color"/>
+
+
+        <attr name="code_bar_title" format="string" />
+        <attr name="code_bar_description" format="string" />
+        <attr name="code_bar_description_color" format="color" />
+        <attr name="code_bar_error_title" format="string" />
+        <attr name="code_bar_error_description" format="string" />
+        <attr name="icon_scanner" format="integer" />
+        <attr name="code_bar_prompt" format="string" />
+
+
     </declare-styleable>
+
 </resources>

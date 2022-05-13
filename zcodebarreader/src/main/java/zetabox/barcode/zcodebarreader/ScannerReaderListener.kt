@@ -8,5 +8,5 @@ interface ScannerReaderListener {
 
     fun onGetResult(code: String)
     fun onCopyResult(code: String)
-    fun onError(code: String)
+    fun onError(error: String)
 }

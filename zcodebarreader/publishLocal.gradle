@@ -9,7 +9,7 @@ project.afterEvaluate {
     publishToMavenLocal {
         def groupId = "com.zetabox"
         def artifactId = "zcodeBarReader"
-        def versionName = "0.0.1-local"
+        def versionName = "0.0.2-local"
         def debugSuffix = "-debug"
         def releaseSuffix = "-release"
         publishing {

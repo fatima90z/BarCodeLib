@@ -35,10 +35,13 @@ class CodeBarReader @JvmOverloads constructor(
     var binding: CodeBarReaderBinding =
         CodeBarReaderBinding.inflate(LayoutInflater.from(context), this);
     private var activity: AppCompatActivity? = null
+
     private var registerForActivityResult: ActivityResultLauncher<ScanOptions>? = null
+
     var listener: ScannerReaderListener? = null
-    var scannerType = ScannerTypeEnum.PRODUCT_CODE_TYPES
-    private lateinit var typedArray: TypedArray
+    var scannerType = ScannerTypeEnum.BARE_CODE
+    private  var typedArray: TypedArray
+    private lateinit var promptValue :String
 
     init {
 
@@ -50,16 +53,22 @@ class CodeBarReader @JvmOverloads constructor(
     }
 
     private fun iniAttributes() {
-        try {
-            binding.description.text =
-                typedArray.getString(R.styleable.code_bar_reader_attributes_code_bar_description)
-            binding.description.setTextColor(
-                typedArray.getColor(R.styleable.code_bar_reader_attributes_code_bar_description_color,
-                    Color.BLUE)
+         try {
 
-            )
-        } catch (e: Exception) {
-            Log.e("qsdsqqs", "${e.message}")
+            binding.description.text = typedArray.getString(R.styleable.code_bar_reader_attributes_code_bar_description)
+            binding.title.text =   typedArray.getString(R.styleable.code_bar_reader_attributes_code_bar_title)
+
+            binding.txtError.text =   typedArray.getString(R.styleable.code_bar_reader_attributes_code_bar_error_description)
+            binding.txtErrorTitle.text =   typedArray.getString(R.styleable.code_bar_reader_attributes_code_bar_error_title)
+
+            binding.description.setTextColor( typedArray.getColor( R.styleable.code_bar_reader_attributes_code_bar_description_color, Color.BLUE   ) )
+
+             binding.imgQrCode.setImageResource(typedArray.getResourceId(R.styleable.code_bar_reader_attributes_icon_scanner , R.drawable.qr_code))
+
+             promptValue = typedArray.getString(R.styleable.code_bar_reader_attributes_code_bar_prompt).toString()
+
+         } catch (e: Exception) {
+            Log.e("ERROR", "${e.message}")
         }
     }
 
@@ -70,6 +79,12 @@ class CodeBarReader @JvmOverloads constructor(
 
     }
 
+
+      fun setEnable (enable : Boolean)
+    {
+        binding.root.isClickable = enable
+        binding.btnCopy.isClickable = enable
+    }
 
     private fun handleCLickEvents() {
         binding.root.setOnClickListener {
@@ -94,28 +109,35 @@ class CodeBarReader @JvmOverloads constructor(
     }
 
     // Start the QR Scanner
-    private fun startScannerBarreCode() {
-        when (scannerType) {
-            ScannerTypeEnum.PRODUCT_CODE_TYPES -> {
+    private fun startScannerBarreCode()  {
+
                 if (activity == null) {
                     Toast.makeText(context, "Please initiate the activity attr", Toast.LENGTH_SHORT)
                         .show()
                     return
                 }
                 var qrScanner = ScanOptions()
-                qrScanner.setDesiredBarcodeFormats(ScanOptions.PRODUCT_CODE_TYPES)
-                qrScanner.setPrompt(context.getString(R.string.scan_barre_code))
+                if(scannerType==  ScannerTypeEnum.BARE_CODE )
+                    qrScanner.setDesiredBarcodeFormats (ScanOptions .PRODUCT_CODE_TYPES)
+
+                if(scannerType==  ScannerTypeEnum.QR_CODE )
+                    qrScanner.setDesiredBarcodeFormats (ScanOptions .QR_CODE)
+
+                qrScanner.setPrompt(promptValue)
+
                 qrScanner.setCameraId(0)
                 qrScanner.setOrientationLocked(false)
                 qrScanner.setBeepEnabled(true)
                 qrScanner.captureActivity = CaptureActivity::class.java
                 registerForActivityResult?.launch(qrScanner)
-            }
-        }
 
-    }
+            }
+
+
+
 
     private fun showResult(result: String) {
+
         if (result.isNotBlank()) {
             binding.txtQrCodeResult.text = result
             binding.layoutResult.visibility = View.VISIBLE
@@ -134,7 +156,7 @@ class CodeBarReader @JvmOverloads constructor(
             ) { result ->
                 if (result.contents == null) {
                     listener?.onError("empty")
-                    showResult("")
+                   // showResult("")
                 } else {
                     listener?.onGetResult(result.contents)
                     showResult(result.contents)

@@ -11,8 +11,13 @@
         android:id="@+id/barCodeReader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:code_bar_description="sqdsqqdqsffsd"
+        app:code_bar_title="title"
+        app:code_bar_description="press QR COde "
         app:code_bar_description_color="@color/dark_white_text"
+        app:code_bar_error_description = "description error  "
+        app:code_bar_error_title = " ERROR : "
+        app:code_bar_prompt = "prompt "
+        app:icon_scanner = "@drawable/qr_code"
         tools:ignore="MissingConstraints" />
 
 
